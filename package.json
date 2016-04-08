@@ -1,0 +1,13 @@
+{
+	"name":         "vbb-runs-every",
+	"description":  "Compute frequencies of departures and routes.",
+	"version":      "0.1.0",
+	"main":         "index.js",
+	"files":        ["index.js"],
+	"keywords":     ["vbb", "schedule", "departures", "routes", "minutes"],
+	"author":       "Jannis R <mail@jannisr.de>",
+	"homepage":     "https://github.com/derhuerst/vbb-runs-every",
+	"repository":   "git://github.com/derhuerst/vbb-runs-every.git",
+	"license":      "ISC",
+	"engines":      {"node": ">=4"}
+}
