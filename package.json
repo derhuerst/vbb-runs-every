@@ -9,5 +9,16 @@
 	"homepage":     "https://github.com/derhuerst/vbb-runs-every",
 	"repository":   "git://github.com/derhuerst/vbb-runs-every.git",
 	"license":      "ISC",
-	"engines":      {"node": ">=4"}
+	"engines":      {"node": ">=4"},
+	"dependencies": {
+		"redis":         "^2.6.0-1"
+	},
+	"devDependencies": {
+		"vbb-trips":     "^0.1.0",
+		"through2":      "^2.0.1"
+	},
+	"scripts": {
+		"build":         "node build.js",
+		"prepublish":    "npm run build"
+	}
 }
