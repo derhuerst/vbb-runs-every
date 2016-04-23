@@ -6,6 +6,8 @@
 [![dependency status](https://img.shields.io/david/derhuerst/vbb-parse-line.svg)](https://david-dm.org/derhuerst/vbb-parse-line)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/vbb-parse-line.svg)
 
+*Note:* **This script puts *a lot* of data into a Redis database!**
+
 
 ## Installing
 
