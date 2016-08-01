@@ -4,6 +4,7 @@ const pipe = require('multipipe')
 const data = require('vbb-trips')
 const through = require('through2')
 const ndjson = require('ndjson')
+const zlib = require('zlib')
 const fs = require('fs')
 
 
@@ -16,13 +17,18 @@ pipe(
 			const next = route.stops[i + 1]
 			for (let j = 0; j < route.when.length; j++) {
 				const timestamp = route.when[j]
-				this.push([stop.s, next.s, (stop.t + timestamp) / 1000])
+				this.push([
+					stop.s, next.s,
+					route.lineId,
+					(stop.t + timestamp) / 1000
+				])
 			}
 		}
 		cb()
 	})
 	, ndjson.stringify()
-	, fs.createWriteStream('data.ndjson')
+	, zlib.createGzip()
+	, fs.createWriteStream('data.ndjson.gz')
 	, (err) => {
 		if (!err) return console.info('done')
 		console.error('err', err.stack || err.message)
