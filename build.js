@@ -9,9 +9,12 @@ const fs = require('fs')
 
 
 
+let routeI = 0
+
 pipe(
 	  data.routes('all')
 	, through.obj(function (route, _, cb) {
+		if (routeI % 100) process.stdout.write('.')
 		for (let i = 0; i < (route.stops.length - 1); i++) {
 			const stop = route.stops[i]
 			const next = route.stops[i + 1]
@@ -24,6 +27,7 @@ pipe(
 				])
 			}
 		}
+		routeI++
 		cb()
 	})
 	, ndjson.stringify()

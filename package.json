@@ -9,15 +9,15 @@
 	"homepage":     "https://github.com/derhuerst/vbb-runs-every",
 	"repository":   "git://github.com/derhuerst/vbb-runs-every.git",
 	"license":      "ISC",
-	"engines":      {"node": ">=4"},
+	"engines":      {"node": ">=6"},
 	"dependencies": {
 		"ioredis": "^2.2"
 	},
 	"devDependencies": {
-		"multipipe": "^0.3.1",
-		"vbb-trips": "^0.3",
+		"multipipe": "^1.0.2",
+		"vbb-trips": "^1.1.1",
 		"through2": "^2.0.1",
-		"ndjson": "^1.4.3"
+		"ndjson": "^1.5.0"
 	},
 	"scripts": {
 		"build":         "node build.js",
