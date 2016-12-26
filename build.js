@@ -1,6 +1,7 @@
 'use strict'
 
-const process = require('child_process')
+const process = require('process')
+const child = require('child_process')
 const queue = require('queue')
 const os = require('os')
 
@@ -27,7 +28,7 @@ q.on('success', (_, job) => {
 
 const add = (from, to) => {
 	const job = (cb) => {
-		process.execFile('node', [convert, '' + from, '' + to], (err) => {
+		child.execFile('node', [convert, '' + from, '' + to], (err) => {
 			if (err) cb(err)
 			else cb()
 		})
