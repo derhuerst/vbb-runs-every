@@ -18,7 +18,8 @@
 		"vbb-trips": "^1.1.1",
 		"through2": "^2.0.1",
 		"ndjson": "^1.5.0",
-		"slice-file": "^1.0.0"
+		"slice-file": "^1.0.0",
+		"queue": "^4.0.0"
 	},
 	"scripts": {
 		"build": "rm -f data/*.ndjson.gz; node build.js",
