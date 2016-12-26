@@ -21,7 +21,7 @@
 		"slice-file": "^1.0.0"
 	},
 	"scripts": {
-		"build": "rm data/*.ndjson.gz && node build.js",
+		"build": "rm -f data/*.ndjson.gz; node build.js",
 		"prepublish": "npm run build"
 	}
 }
