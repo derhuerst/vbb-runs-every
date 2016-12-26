@@ -1,20 +1,29 @@
 'use strict'
 
 const pipe = require('multipipe')
-const data = require('vbb-trips')
-const through = require('through2')
+const slice = require('slice-file')
 const ndjson = require('ndjson')
+const through = require('through2')
 const zlib = require('zlib')
 const fs = require('fs')
+const path = require('path')
 
 
 
-let routeI = 0
+const src = require.resolve('vbb-trips/data/routes.ndjson')
+const from = parseInt(process.argv[2])
+const to = parseInt(process.argv[3])
+if ('number' !== typeof from || 'number' !== typeof to) {
+	console.error('invalid args')
+	process.exit(1)
+}
+
+
 
 pipe(
-	  data.routes('all')
+	  slice(src).slice(from, to)
+	, ndjson.parse()
 	, through.obj(function (route, _, cb) {
-		if (routeI % 100) process.stdout.write('.')
 		for (let i = 0; i < (route.stops.length - 1); i++) {
 			const stop = route.stops[i]
 			const next = route.stops[i + 1]
@@ -27,14 +36,14 @@ pipe(
 				])
 			}
 		}
-		routeI++
 		cb()
 	})
 	, ndjson.stringify()
 	, zlib.createGzip()
-	, fs.createWriteStream('data.ndjson.gz')
+	, fs.createWriteStream(path.join(__dirname, 'data', `${from}-${to}.ndjson.gz`))
 	, (err) => {
-		if (!err) return console.info('done')
-		console.error('err', err.stack || err.message)
+		if (!err) return
+		console.error(err)
+		process.exit(1)
 	}
 )
