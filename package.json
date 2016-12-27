@@ -3,7 +3,7 @@
 	"description":  "Compute frequencies of departures and routes.",
 	"version":      "0.1.0",
 	"main":         "index.js",
-	"files":        ["index.js"],
+	"files":        ["index.js", "data/*.ndjson.gz"],
 	"keywords":     ["vbb", "schedule", "departures", "routes", "minutes"],
 	"author":       "Jannis R <mail@jannisr.de>",
 	"homepage":     "https://github.com/derhuerst/vbb-runs-every",
