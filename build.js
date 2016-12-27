@@ -6,6 +6,8 @@ const queue = require('queue')
 const os = require('os')
 
 const convert = require.resolve('./convert')
+const concurrency = os.cpus().length
+console.log(`Building on ${concurrency} chains.`)
 
 const src = require.resolve('vbb-trips/data/routes.ndjson')
 const total = parseInt(child.execSync(`cat '${src}' | wc -l`).toString())
@@ -13,7 +15,7 @@ const chunk = 1000
 
 
 
-const q = queue({concurrency: os.cpus().length})
+const q = queue({concurrency})
 
 q.on('error', (err) => {
 	console.error(err)
