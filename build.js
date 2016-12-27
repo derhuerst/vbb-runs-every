@@ -22,22 +22,17 @@ q.on('error', (err) => {
 	process.exit(1)
 })
 
-q.on('success', (_, job) => {
-	console.log('chunk', job.nr, 'finished')
-})
 
 
-
-const add = (from, to) => {
-	const job = (cb) => {
+const add = (from, to) =>
+	q.push((cb) => {
+		console.log(`Starting job ${from}-${to}.`)
 		child.execFile('node', [convert, '' + from, '' + to], (err) => {
-			if (err) cb(err)
-			else cb()
+			if (err) return cb(err)
+			console.log(`Job ${from}-${to} finished.`)
+			cb()
 		})
-	}
-	job.nr = from / chunk
-	q.push(job)
-}
+	})
 
 for (let offset = 0; offset < total; offset += chunk) {
 	add(offset, Math.min(offset + chunk, total))
