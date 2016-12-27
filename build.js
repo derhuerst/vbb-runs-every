@@ -8,7 +8,7 @@ const os = require('os')
 const convert = require.resolve('./convert')
 
 const src = require.resolve('vbb-trips/data/routes.ndjson')
-const total = parseInt(process.execSync(`cat '${src}' | wc -l`).toString())
+const total = parseInt(child.execSync(`cat '${src}' | wc -l`).toString())
 const chunk = 1000
 
 
