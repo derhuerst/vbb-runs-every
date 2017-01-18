@@ -33,14 +33,13 @@ pipe(
 					stop.s, next.s,
 					route.lineId,
 					(stop.t + timestamp) / 1000
-				])
+				].join('\0') + '\n')
 			}
 		}
 		cb()
 	})
-	, ndjson.stringify()
 	, zlib.createGzip()
-	, fs.createWriteStream(path.join(__dirname, 'data', `${from}-${to}.ndjson.gz`))
+	, fs.createWriteStream(path.join(__dirname, `${from}-${to}.txt.gz`))
 	, (err) => {
 		if (!err) return
 		console.error(err)

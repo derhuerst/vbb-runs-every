@@ -5,9 +5,9 @@ const child = require('child_process')
 const queue = require('queue')
 const os = require('os')
 
-const convert = require.resolve('./convert')
+const convert = require.resolve('./convert-worker')
 const concurrency = os.cpus().length
-console.log(`Building on ${concurrency} chains.`)
+console.log(`Building with ${concurrency} worker processes.`)
 
 const src = require.resolve('vbb-trips/data/routes.ndjson')
 const total = parseInt(child.execSync(`cat '${src}' | wc -l`).toString())

@@ -22,7 +22,9 @@
 		"queue": "^4.0.0"
 	},
 	"scripts": {
-		"build": "rm -f data/*.ndjson.gz; node build.js",
-		"prepublish": "npm run build"
+		"cleanup": "rm -f build/*.txt.gz",
+		"convert": "node build/convert.js",
+		"combine": "cat build/*.txt.gz | gunzip | gzip -9 > build/all.txt.gz",
+		"prepublish": "npm run cleanup && npm run convert && npm run combine"
 	}
 }
