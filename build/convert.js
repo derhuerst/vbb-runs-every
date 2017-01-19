@@ -6,7 +6,7 @@ const queue = require('queue')
 const os = require('os')
 
 const convert = require.resolve('./convert-worker')
-const concurrency = os.cpus().length
+const concurrency = Math.round(os.cpus().length / 2)
 console.log(`Building with ${concurrency} worker processes.`)
 
 const src = require.resolve('vbb-trips/data/routes.ndjson')
@@ -27,7 +27,8 @@ q.on('error', (err) => {
 const add = (from, to) =>
 	q.push((cb) => {
 		console.log(`Starting job ${from}-${to}.`)
-		child.execFile('node', [convert, '' + from, '' + to], (err) => {
+		child.execFile('node', [convert, '' + from, '' + to], (err, _, stderr) => {
+			console.error(stderr)
 			if (err) return cb(err)
 			console.log(`Job ${from}-${to} finished.`)
 			cb()
